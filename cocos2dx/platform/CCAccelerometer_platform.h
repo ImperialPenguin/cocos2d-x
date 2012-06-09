@@ -42,6 +42,8 @@ THE SOFTWARE.
 	#include "bada/CCAccelerometer_bada.h"
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_QNX)
     #include "qnx/CCAccelerometer_qnx.h"
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    #include "mac/CCAccelerometer_mac.h"
 #else
     #error
 #endif

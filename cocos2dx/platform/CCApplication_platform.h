@@ -43,6 +43,8 @@ THE SOFTWARE.
 	#include "bada/CCApplication_bada.h"
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_QNX)
     #include "qnx/CCApplication_qnx.h"
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    #include "mac/CCApplication_mac.h"
 #else
     #error
 #endif

@@ -275,6 +275,10 @@ public:
 	 */
 	void popScene(void);
 
+    
+    
+//    void popSceneWithTransition( ccTime t);
+    
 	/** Replaces the running scene with a new one. The running scene is terminated.
 	 * ONLY call it if there is a running scene.
 	 */

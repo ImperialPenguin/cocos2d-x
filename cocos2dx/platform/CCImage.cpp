@@ -27,13 +27,13 @@ THE SOFTWARE.
 #include "CCCommon.h"
 #include "CCStdC.h"
 #include "CCFileUtils.h"
-#include "png.h"
+
 #include <string>
 #include <ctype.h>
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_IOS) 
+#if ((CC_TARGET_PLATFORM != CC_PLATFORM_IOS) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC))
 // on ios, we should use platform/ios/CCImage_ios.mm instead
-
+#include "png.h"
 #define  QGLOBAL_H        // defined for wophone
 #include "jpeglib.h"
 #undef   QGLOBAL_H

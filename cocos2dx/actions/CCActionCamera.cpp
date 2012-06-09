@@ -28,8 +28,6 @@ THE SOFTWARE.
 #include "CCCamera.h"
 #include "CCStdC.h"
 
-using namespace std;
-
 namespace cocos2d{
 	//
 	// CameraAction

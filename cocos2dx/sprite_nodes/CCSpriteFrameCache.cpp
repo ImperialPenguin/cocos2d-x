@@ -165,20 +165,23 @@ void CCSpriteFrameCache::addSpriteFramesWithDictionary(CCDictionary<std::string,
 
 			// get aliases
 			CCMutableArray<CCString*> *aliases = (CCMutableArray<CCString*> *) (frameDict->objectForKey(std::string("aliases")));
-            CCMutableArray<CCString*>::CCMutableArrayIterator iter;
-
-            CCString * frameKey = new CCString(key.c_str());
-            for (iter = aliases->begin(); iter != aliases->end(); ++iter)
+            if(aliases)
             {
-                std::string oneAlias = ((CCString*) (*iter))->m_sString;
-                if (m_pSpriteFramesAliases->objectForKey(oneAlias))
+                CCMutableArray<CCString*>::CCMutableArrayIterator iter;
+                
+                CCString * frameKey = new CCString(key.c_str());
+                for (iter = aliases->begin(); iter != aliases->end(); ++iter)
                 {
-                    CCLOG("cocos2d: WARNING: an alias with name %s already exists", oneAlias.c_str());
+                    std::string oneAlias = ((CCString*) (*iter))->m_sString;
+                    if (m_pSpriteFramesAliases->objectForKey(oneAlias))
+                    {
+                        CCLOG("cocos2d: WARNING: an alias with name %s already exists", oneAlias.c_str());
+                    }
+                    
+                    m_pSpriteFramesAliases->setObject(frameKey, oneAlias);
                 }
-
-                m_pSpriteFramesAliases->setObject(frameKey, oneAlias);
+                frameKey->release();
             }
-            frameKey->release();
             // create frame
             spriteFrame = new CCSpriteFrame();
             spriteFrame->initWithTexture(pobTexture,

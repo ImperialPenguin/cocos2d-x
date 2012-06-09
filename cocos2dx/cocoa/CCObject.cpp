@@ -61,8 +61,7 @@ CCObject::~CCObject(void)
     // if the object is referenced by Lua engine, remove it
     if (m_nLuaID)
     {
-        CCScriptEngineProtocol* pEngine = CCScriptEngineManager::sharedManager()->getScriptEngine();
-        if (pEngine) pEngine->removeCCObjectByID(m_nLuaID);
+        CCScriptEngineManager::sharedManager()->getScriptEngine()->removeCCObjectByID(m_nLuaID);
     }
 }
 

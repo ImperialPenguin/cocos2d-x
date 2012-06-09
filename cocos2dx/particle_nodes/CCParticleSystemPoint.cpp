@@ -28,7 +28,7 @@ THE SOFTWARE.
 
 namespace cocos2d {
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX) && (CC_TARGET_PLATFORM != CC_PLATFORM_QNX) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC)
 
 //implementation CCParticleSystemPoint
 bool CCParticleSystemPoint::initWithTotalParticles(unsigned int numberOfParticles)

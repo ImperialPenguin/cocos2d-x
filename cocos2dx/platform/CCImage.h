@@ -124,7 +124,8 @@ public:
     CC_SYNTHESIZE_READONLY(short,   m_nWidth,       Width);
     CC_SYNTHESIZE_READONLY(short,   m_nHeight,      Height);
     CC_SYNTHESIZE_READONLY(int,     m_nBitsPerComponent,   BitsPerComponent);
-
+    static bool m_bEnabledScale;
+    static bool getIsScaleEnabled(void){ return m_bEnabledScale; }
 protected:
     bool _initWithJpgData(void *pData, int nDatalen);
     bool _initWithPngData(void *pData, int nDatalen);
@@ -138,6 +139,8 @@ protected:
     unsigned char *m_pData;
     bool m_bHasAlpha;
     bool m_bPreMulti;
+    double m_dScaleX;
+    double m_dScaleY;
 
 private:
     // noncopyable

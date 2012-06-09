@@ -25,7 +25,12 @@ THE SOFTWARE.
 ****************************************************************************/
 
 #include "cocoa/CCNS.h"
+#include "platform.h"
+//#if	(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+#include "CCDirectorMac.h"
+//#else
 #include "CCDirector.h"
+//#endif
 #include "CCScene.h"
 #include "CCMutableArray.h"
 #include "CCScheduler.h"
@@ -62,7 +67,12 @@ namespace  cocos2d
 {
 
 // singleton stuff
-static CCDisplayLinkDirector s_sharedDirector;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+	static CCDisplayLinkDirectorMac s_sharedDirector;
+#else
+	static CCDisplayLinkDirector s_sharedDirector;
+#endif
+
 static bool s_bFirstRun = true;
 
 #define kDefaultFPS		60  // 60 frames per second
@@ -157,7 +167,7 @@ void CCDirector::setGLDefaultValues(void)
 	CCAssert(m_pobOpenGLView, "opengl view should not be null");
 
 	setAlphaBlending(true);
-	setDepthTest(true);
+	setDepthTest(false);
 	setProjection(m_eProjection);
 
 	// set other opengl default values
@@ -329,14 +339,19 @@ void CCDirector::setProjection(ccDirectorProjection kProjection)
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		// accommodate iPad retina while keep backward compatibility
-		if (m_pobOpenGLView && m_pobOpenGLView->isIpad() && m_pobOpenGLView->getMainScreenScale() > 1.0)
-		{
-			gluPerspective(60, (GLfloat)size.width/size.height, zeye-size.height/2, zeye+size.height/2);	
-		}
-		else
-		{
-			gluPerspective(60, (GLfloat)size.width/size.height, 0.5f, 1500.0f);
-		}				
+#if	(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+            gluPerspective(60, (GLfloat)size.width/size.height, 0.5f, 1500.0f);
+#else
+            if (m_pobOpenGLView && m_pobOpenGLView->isIpad() && m_pobOpenGLView->getMainScreenScale() > 1.0)
+            {
+                gluPerspective(60, (GLfloat)size.width/size.height, zeye-size.height/2, zeye+size.height/2);	
+            }
+            else
+            {
+                gluPerspective(60, (GLfloat)size.width/size.height, 0.5f, 1500.0f);
+            }	
+#endif
+			
 		
 		glMatrixMode(GL_MODELVIEW);	
 		glLoadIdentity();
@@ -546,7 +561,27 @@ void CCDirector::popScene(void)
 		m_pNextScene = m_pobScenesStack->getObjectAtIndex(c - 1);
 	}
 }
-
+//    
+//    void CCDirector::popSceneWithTransition( ccTime t)
+//    {
+//
+//        m_pobScenesStack->removeLastObject();
+//        unsigned int c = m_pobScenesStack->count();
+//        
+//        if (c == 0)
+//        {
+//            end();
+//        }
+//        else
+//        {
+//            m_bSendCleanupToScene = true;
+//            CCScene* scene = CCTransitionScene::transitionWithDuration(t,m_pobScenesStack->getObjectAtIndex(c - 1));
+//            m_pobScenesStack->replaceObjectAtIndex(c-1,scene);
+//            m_pNextScene = scene;
+//            
+//        }
+//    }
+    
 void CCDirector::end()
 {
 	m_bPurgeDirecotorInNextLoop = true;
@@ -785,12 +820,16 @@ bool CCDirector::enableRetinaDisplay(bool enabled)
 	{
 		return false;
 	}
+#if	(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 
+#else
 	// SD device
 	if (m_pobOpenGLView->getMainScreenScale() == 1.0)
 	{
 		return false;
 	}
+#endif
+
 
 	float newScale = (float)(enabled ? 2 : 1);
 	setContentScaleFactor(newScale);

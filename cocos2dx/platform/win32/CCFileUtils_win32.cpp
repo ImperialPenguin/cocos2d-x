@@ -56,7 +56,7 @@ void CCFileUtils::setResourcePath(const char *pszResourcePath)
     strcpy(s_pszResourcePath, pszResourcePath);
 }
 
-const char* CCFileUtils::fullPathFromRelativePath(const char *pszRelativePath, ccResolutionType *pResolutionType)
+const char* CCFileUtils::fullPathFromRelativePath(const char *pszRelativePath)
 {
 	_CheckPath();
 
@@ -89,8 +89,6 @@ const char* CCFileUtils::fullPathFromRelativePath(const char *pszRelativePath, c
     std::string::size_type pos = hiRes.find_last_of("/\\");
     std::string::size_type dotPos = hiRes.find_last_of(".");
 
-	*pResolutionType = kCCResolutioniPhone;
-
 	if (isIpad)
 	{
 		if (CC_CONTENT_SCALE_FACTOR() == 1.0f)
@@ -105,8 +103,6 @@ const char* CCFileUtils::fullPathFromRelativePath(const char *pszRelativePath, c
             {
                 hiRes.append(CC_IPAD_FILENAME_SUFFIX);
             }
-
-            *pResolutionType = kCCResolutioniPad;
 		}
 		else
 		{
@@ -120,8 +116,6 @@ const char* CCFileUtils::fullPathFromRelativePath(const char *pszRelativePath, c
             {
                 hiRes.append(CC_IPAD_DISPLAY_RETINA_SUPPFIX);
             }
-
-			*pResolutionType = kCCResolutioniPadRetinaDisplay;
 		}
 	}
 	else
@@ -138,8 +132,6 @@ const char* CCFileUtils::fullPathFromRelativePath(const char *pszRelativePath, c
             {
                 hiRes.append(CC_RETINA_DISPLAY_FILENAME_SUFFIX);
             }
-
-			*pResolutionType = kCCResolutioniPhoneRetinaDisplay;
         }
 	}  
 

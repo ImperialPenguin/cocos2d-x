@@ -25,7 +25,7 @@ THE SOFTWARE.
 #include "CCFileUtils.h"
 #include "CCDirector.h"
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_IOS)
+#if ((CC_TARGET_PLATFORM != CC_PLATFORM_IOS) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC))
 
 #include <stack>
 #include <libxml/parser.h>
@@ -346,14 +346,13 @@ unsigned char* CCFileUtils::getFileDataFromZip(const char* pszZipFilePath, const
     return pBuffer;
 }
 
-const char* CCFileUtils::fullPathFromRelativePath(const char *pszRelativePath)
-{
-    ccResolutionType ignore;
-    return fullPathFromRelativePath(pszRelativePath, &ignore);
-}
-
 
 /// functions iOS specific
+const char* CCFileUtils::fullPathFromRelativePath(const char *pszRelativePath, ccResolutionType *pResolutionType)
+{
+	return "";
+}
+
 void CCFileUtils::setiPhoneRetinaDisplaySuffix(const char *suffix)
 {
 }
@@ -426,4 +425,4 @@ NS_CC_END;
 #include "linux/CCFileUtils_linux.cpp"
 #endif
 
-#endif // (CC_TARGET_PLATFORM != CC_PLATFORM_IOS)
+#endif // ((CC_TARGET_PLATFORM != CC_PLATFORM_IOS) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC))

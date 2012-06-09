@@ -28,7 +28,7 @@ THE SOFTWARE.
 //
 // Common layer for OpenGL stuff
 //
-
+#include "CCPlatformConfig.h"
 #include "CCEGLView.h"
 
 #define CC_GLVIEW                   cocos2d::CCEGLView
@@ -56,7 +56,6 @@ THE SOFTWARE.
 #define CC_GL_COLOR_ATTACHMENT0		GL_COLOR_ATTACHMENT0_OES
 #define CC_GL_FRAMEBUFFER_COMPLETE	GL_FRAMEBUFFER_COMPLETE_OES
 
-#include "CCCommon.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "OpenGLES/ES1/gl.h"
@@ -163,7 +162,70 @@ extern PFNGLDELETEBUFFERSARBPROC 			glDeleteBuffersARB;
 #include <GLES/gl.h>
 #include <GLES/glext.h>
 #endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+#import <OpenGL/gl.h>
+#import <OpenGL/glext.h>
 
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+
+#undef ccglOrtho
+#undef ccglClearDepth
+#undef ccglGenerateMipmap
+#undef ccglGenFramebuffers
+#undef ccglBindFramebuffer
+#undef ccglFramebufferTexture2D
+#undef ccglDeleteFramebuffers
+#undef ccglCheckFramebufferStatus
+
+#undef CC_GL_FRAMEBUFFER
+#undef CC_GL_FRAMEBUFFER_BINDING
+#undef CC_GL_COLOR_ATTACHMENT0
+#undef CC_GL_FRAMEBUFFER_COMPLETE
+
+#define ccglOrtho                                       	glOrtho
+#define ccglClearDepth                              		glClearDepth
+#define ccglGenerateMipmap                          	glGenerateMipmap
+#define ccglGenFramebuffers                         	glGenFramebuffers
+#define ccglBindFramebuffer                         	glBindFramebuffer
+#define ccglFramebufferTexture2D                    	glFramebufferTexture2D
+#define ccglDeleteFramebuffers                      	glDeleteFramebuffers
+#define ccglCheckFramebufferStatus              		glCheckFramebufferStatus
+#define ccglTranslate                                   	glTranslatef
+
+#define CC_GL_FRAMEBUFFER                       	GL_FRAMEBUFFER
+#define CC_GL_FRAMEBUFFER_BINDING           		GL_FRAMEBUFFER_BINDING
+#define CC_GL_COLOR_ATTACHMENT0             		GL_COLOR_ATTACHMENT0
+#define CC_GL_FRAMEBUFFER_COMPLETE          		GL_FRAMEBUFFER_COMPLETE
+
+
+
+#define CC_GL_POINT_SPRITE                      		GL_POINT_SPRITE
+#define CC_GL_COORD_REPLACE                     	GL_COORD_REPLACE
+#define CC_GL_POINT_SIZE_ARRAY                  	0x8B9C
+#define ccglPointSizePointer                            	glPointSizePointer
+#define ccglFrustum                                 		glFrustum
+#else
+#define ccglOrtho                                       	glOrthof
+#define ccglClearDepth                              		glClearDepthf
+#define ccglGenerateMipmap                          	glGenerateMipmapOES
+#define ccglGenFramebuffers                         	glGenFramebuffersOES
+#define ccglBindFramebuffer                         	glBindFramebufferOES
+#define ccglFramebufferTexture2D                    	glFramebufferTexture2DOES
+#define ccglDeleteFramebuffers                      	glDeleteFramebuffersOES
+#define ccglCheckFramebufferStatus              		glCheckFramebufferStatusOES
+#define ccglTranslate                                   	glTranslatef
+
+#define CC_GL_FRAMEBUFFER                       	GL_FRAMEBUFFER_OES
+#define CC_GL_FRAMEBUFFER_BINDING           		GL_FRAMEBUFFER_BINDING_OES
+#define CC_GL_COLOR_ATTACHMENT0             		GL_COLOR_ATTACHMENT0_OES
+#define CC_GL_FRAMEBUFFER_COMPLETE          	    GL_FRAMEBUFFER_COMPLETE_OES
+#define CC_GL_POINT_SPRITE                      		GL_POINT_SPRITE_OES
+#define CC_GL_COORD_REPLACE                     	GL_COORD_REPLACE_OES
+#define CC_GL_POINT_SIZE_ARRAY                  	GL_POINT_SIZE_ARRAY_OES
+#define ccglPointSizePointer                            	glPointSizePointerOES
+#define ccglFrustum                                 		glFrustumf
+#endif
 NS_CC_BEGIN;
 
 /*

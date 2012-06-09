@@ -161,14 +161,18 @@ extern "C"
 	{
 		JNIEnv *env = 0;
 
+		jboolean isCopy;
 		if (! getEnv(&env))
 		{
 			return 0;
 		}
 
-		const char* chars = env->GetStringUTFChars(jstr, NULL);
+		const char* chars = env->GetStringUTFChars(jstr, &isCopy);
 		string ret(chars);
-		env->ReleaseStringUTFChars(jstr, chars);
+		if (isCopy)
+		{
+			env->ReleaseStringUTFChars(jstr, chars);
+		}
 
 		return ret;
 	}

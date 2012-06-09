@@ -46,18 +46,31 @@ build for which target platform
 #define CC_PLATFORM_LINUX              6
 #define CC_PLATFORM_BADA               7
 #define CC_PLATFORM_QNX				   8
-
+#define CC_PLATFORM_MAC	      		   9
 // Determine tartet platform by compile environment macro.
 #define CC_TARGET_PLATFORM             CC_PLATFORM_UNKNOWN
 
-// iphone
-#if ! CC_TARGET_PLATFORM && (defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR))
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+#endif
+
+#if ! CC_TARGET_PLATFORM && TARGET_OS_IPHONE
     #undef  CC_TARGET_PLATFORM
     #define CC_TARGET_PLATFORM         CC_PLATFORM_IOS
     #define CC_SUPPORT_MULTITHREAD 0
     #define CC_SUPPORT_UNICODE 0
     #define CC_SUPPORT_PVRTC
 #endif
+//
+// iphone
+#if ! CC_TARGET_PLATFORM && TARGET_OS_MAC
+    #undef  CC_TARGET_PLATFORM
+    #define CC_TARGET_PLATFORM         CC_PLATFORM_MAC
+    #define CC_SUPPORT_MULTITHREAD 0
+    #define CC_SUPPORT_UNICODE 0
+#endif
+
+
 
 // android
 #if ! CC_TARGET_PLATFORM && defined(ANDROID)
@@ -111,46 +124,46 @@ build for which target platform
 // user configure
 //////////////////////////////////////////////////////////////////////////
 
-// Check user assigned target platform.
-#if defined(CC_UNDER_IOS)
-    #undef  CC_TARGET_PLATFORM
-    #define CC_TARGET_PLATFORM         CC_PLATFORM_IOS
-#endif
-
-#if defined(CC_UNDER_ANDROID)
-    #undef  CC_TARGET_PLATFORM
-    #define CC_TARGET_PLATFORM         CC_PLATFORM_ANDROID
-#endif
-
-#if defined(CC_UNDER_WOPHONE)
-    #undef  CC_TARGET_PLATFORM
-    #define CC_TARGET_PLATFORM         CC_PLATFORM_WOPHONE
-#endif
-
-#if defined(CC_UNDER_WIN32)
-    #undef  CC_TARGET_PLATFORM
-    #define CC_TARGET_PLATFORM         CC_PLATFORM_WIN32
-#endif
-
-#if defined(CC_UNDER_MARMALADE)
-#undef  CC_TARGET_PLATFORM
-#define CC_TARGET_PLATFORM			   CC_PLATFORM_MARMALADE
-#endif
-#if defined(CC_UNDER_LINUX)
-#undef  CC_TARGET_PLATFORM
-#define CC_TARGET_PLATFORM			   CC_PLATFORM_LINUX
-#endif
-
-#if defined(CC_UNDER_BADA)
-#undef  CC_TARGET_PLATFORM
-#define CC_TARGET_PLATFORM			   CC_PLATFORM_BADA
-#endif
-
-#if defined(CC_UNDER_QNX)
-#undef  CC_TARGET_PLATFORM
-#define CC_TARGET_PLATFORM        	  CC_PLATFORM_QNX
-#endif
-
+//// Check user assigned target platform.
+//#if defined(CC_UNDER_IOS)
+//    #undef  CC_TARGET_PLATFORM
+//    #define CC_TARGET_PLATFORM         CC_PLATFORM_IOS
+//#endif
+//
+//#if defined(CC_UNDER_ANDROID)
+//    #undef  CC_TARGET_PLATFORM
+//    #define CC_TARGET_PLATFORM         CC_PLATFORM_ANDROID
+//#endif
+//
+//#if defined(CC_UNDER_WOPHONE)
+//    #undef  CC_TARGET_PLATFORM
+//    #define CC_TARGET_PLATFORM         CC_PLATFORM_WOPHONE
+//#endif
+//
+//#if defined(CC_UNDER_WIN32)
+//    #undef  CC_TARGET_PLATFORM
+//    #define CC_TARGET_PLATFORM         CC_PLATFORM_WIN32
+//#endif
+//
+//#if defined(CC_UNDER_MARMALADE)
+//#undef  CC_TARGET_PLATFORM
+//#define CC_TARGET_PLATFORM			   CC_PLATFORM_MARMALADE
+//#endif
+//#if defined(CC_UNDER_LINUX)
+//#undef  CC_TARGET_PLATFORM
+//#define CC_TARGET_PLATFORM			   CC_PLATFORM_LINUX
+//#endif
+//
+//#if defined(CC_UNDER_BADA)
+//#undef  CC_TARGET_PLATFORM
+//#define CC_TARGET_PLATFORM			   CC_PLATFORM_BADA
+//#endif
+//
+//#if defined(CC_UNDER_QNX)
+//#undef  CC_TARGET_PLATFORM
+//#define CC_TARGET_PLATFORM        	  CC_PLATFORM_QNX
+//#endif
+//
 // Check user assigned supportive of multi-thread
 #if defined(CC_ENABLE_MULTITHREAD)
     #undef  CC_SUPPORT_MULTITHREAD
