@@ -29,9 +29,9 @@
  */
 #include "ccConfig.h"
 #include "CCPlatformConfig.h"
-
-#define MacGLView					void
-#define NSWindow					        void
+//
+//#define MacGLView					void
+//#define NSWindow					        void
 
 /** @def CC_ENABLE_CACHE_TEXTTURE_DATA
 Enable it if you want to cache the texture data.
