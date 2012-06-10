@@ -21,12 +21,13 @@ static AppDelegate s_sharedApplication;
 {
     //    cocos2d::CCDirectorMac *director = (cocos2d::CCDirectorMac*) cocos2d::CCDirectorMac::sharedDirector();
     //    
-    NSRect rect = NSMakeRect(0, 0, 480, 320);    
-    window = [[NSWindow alloc] initWithContentRect: rect styleMask:( NSResizableWindowMask | NSClosableWindowMask | NSTitledWindowMask) backing:NSBackingStoreBuffered defer:YES];
+    NSRect rect = NSMakeRect(650, 350, 480, 320);    
+    window = [[NSWindow alloc] initWithContentRect: rect styleMask:( NSClosableWindowMask | NSTitledWindowMask) backing:NSBackingStoreBuffered defer:YES];
     
     glView = [[EAGLView alloc] initWithFrame:rect];
     [glView initWithFrame:rect];
     [window setContentView:glView];
+    [window setTitle:@"Cocos2d-x Tests"];
     
     [window makeKeyAndOrderFront:self];
     cocos2d::CCApplication::sharedApplication().run();
