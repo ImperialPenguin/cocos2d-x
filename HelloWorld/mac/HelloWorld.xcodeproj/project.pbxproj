@@ -1556,7 +1556,6 @@
 				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					NDEBUG,
 					USE_FILE32API,
 					"DEBUG=1",
 					"$(inherited)",

@@ -1,17 +1,17 @@
 //
 //  AppDelegate.m
-//  pouet
+//  test
 //
-//  Created by joseph pinkasfeld on 5/18/12.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Created by John Garrison on 6/9/12.
+//  Copyright (c) 2012 Imperial Penguin. All rights reserved.
 //
 #include "CCPlatformConfig.h"
 #include "AppDelegate.h"
-#import "AppControllerMac.h"
+#import "AppController.h"
 #include "CCDirectorMac.h"
 
 
-@implementation AppControllerMac
+@implementation AppController
 @synthesize window, glView;
 
 // cocos2d application instance
@@ -19,8 +19,8 @@ static AppDelegate s_sharedApplication;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-//    cocos2d::CCDirectorMac *director = (cocos2d::CCDirectorMac*) cocos2d::CCDirectorMac::sharedDirector();
-//    
+    //    cocos2d::CCDirectorMac *director = (cocos2d::CCDirectorMac*) cocos2d::CCDirectorMac::sharedDirector();
+    //    
     NSRect rect = NSMakeRect(0, 0, 480, 320);    
     window = [[NSWindow alloc] initWithContentRect: rect styleMask:( NSResizableWindowMask | NSClosableWindowMask | NSTitledWindowMask) backing:NSBackingStoreBuffered defer:YES];
     
@@ -30,15 +30,6 @@ static AppDelegate s_sharedApplication;
     
     [window makeKeyAndOrderFront:self];
     cocos2d::CCApplication::sharedApplication().run();
-//	director->setOpenGLView(glView_);
-//
-//	// EXPERIMENTAL stuff.
-//	// 'Effects' don't work correctly when autoscale is turned on.
-//	// Use kCCDirectorResize_NoScale if you don't want auto-scaling.
-//	director->setResizeMode(kCCDirectorResize_AutoScale);
-//	
-//	// Enable "moving" mouse event. Default no.
-//	[window_ setAcceptsMouseMovedEvents:NO];
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication

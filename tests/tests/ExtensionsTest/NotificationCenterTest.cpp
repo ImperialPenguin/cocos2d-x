@@ -60,7 +60,11 @@ void Light::setIsConnectToSwitch(bool bConnectToSwitch)
 
 void Light::switchStateChanged(CCObject* obj)
 {
+#if CC_PLATFORM_MAC // llvm doesn't like the cast from CCObject* to int
+    long index = (long)obj;
+#else
     int index = (int)obj;
+#endif
     s_bSwitchOn = index == 0 ? false : true;
     updateLightState();
 }

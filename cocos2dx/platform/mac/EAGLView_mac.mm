@@ -219,8 +219,8 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 	NSPoint event_location = [theEvent locationInWindow];
 	NSPoint local_point = [self convertPoint:event_location fromView:nil];
 	
-	float x = local_point.x/2;
-	float y = [self getHeight] - local_point.y/2;
+	float x = local_point.x;
+	float y = [self getHeight] - local_point.y;
 	pTouch->SetTouchInfo(x, y);
 	
 	CFDictionaryAddValue(touchesIntergerDict, [NSNumber numberWithInt:11], [NSNumber numberWithInt:unUsedIndex]);
@@ -258,8 +258,8 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 	NSPoint event_location = [theEvent locationInWindow];
 	NSPoint local_point = [self convertPoint:event_location fromView:nil];
 	
-	float x = local_point.x/2;
-	float y = [self getHeight] - local_point.y/2;
+	float x = local_point.x;
+	float y = [self getHeight] - local_point.y;
 	pTouch->SetTouchInfo(x, y);
 	
 	set.addObject(pTouch);
@@ -290,8 +290,8 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 	NSPoint event_location = [theEvent locationInWindow];
 	NSPoint local_point = [self convertPoint:event_location fromView:nil];
 	
-	float x = local_point.x/2;
-	float y = [self getHeight] - local_point.y/2;
+	float x = local_point.x;
+	float y = [self getHeight] - local_point.y;
 	pTouch->SetTouchInfo(x, y);
 	
 	set.addObject(pTouch);

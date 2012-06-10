@@ -1,14 +1,15 @@
 //
-//  AppDelegate.h
-//  pouet
+//  AppController.h
+//  test
 //
-//  Created by joseph pinkasfeld on 5/18/12.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Created by John Garrison on 6/9/12.
+//  Copyright (c) 2012 Imperial Penguin. All rights reserved.
 //
 
 #import "cocos2d.h"
 #import "EAGLView_mac.h"
-@interface AppControllerMac : NSObject <NSApplicationDelegate>
+
+@interface AppController : NSObject <NSApplicationDelegate>
 {
     NSWindow    *window;
     EAGLView	*glView;

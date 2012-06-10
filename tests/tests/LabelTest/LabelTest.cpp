@@ -40,7 +40,7 @@ CCLayer* restartAtlasAction();
 
 static int sceneIdx = -1; 
 
-#define MAX_LAYER	18
+#define MAX_LAYER	17
 
 CCLayer* createAtlasLayer(int nIndex)
 {
@@ -65,7 +65,6 @@ CCLayer* createAtlasLayer(int nIndex)
 		case 14: return new LabelTTFTest();
 		case 15: return new LabelTTFMultiline();
 		case 16: return new LabelTTFChinese();
-        case 17: return new LabelBMFontChinese();
 	}
 
 	return NULL;
@@ -579,12 +578,10 @@ Atlas6::Atlas6()
 	CCSize s = CCDirector::sharedDirector()->getWinSize();
 
 	CCLabelBMFont* label = NULL;
-	//中国
-	label = CCLabelBMFont::labelWithString("中国", "fonts/bitmapFontChinese.fnt", 
-		200, CCTextAlignmentRight);
+	label = CCLabelBMFont::labelWithString("FaFeFiFoFu", "fonts/bitmapFontTest5.fnt");
 	addChild(label);
-	label->setPosition( ccp(s.width / 2.0f, s.height / 2.0f + 50) );
-	label->setAnchorPoint( ccp(1.0f, 0.5f) ) ;
+	label->setPosition( ccp(s.width/2, s.height/2+50) );
+	label->setAnchorPoint( ccp(0.5f, 0.5f) ) ;
 	
 	label = CCLabelBMFont::labelWithString("fafefifofu", "fonts/bitmapFontTest5.fnt");
 	addChild(label);
@@ -709,7 +706,7 @@ BitmapFontMultiLine::BitmapFontMultiLine()
     CCSize s;
 
     // Left
-    CCLabelBMFont *label1 = CCLabelBMFont::labelWithString(" Multi line\nLeft", "fonts/bitmapFontTest3.fnt");
+    CCLabelBMFont *label1 = CCLabelBMFont::labelWithString("Multi line\nLeft", "fonts/bitmapFontTest3.fnt");
     label1->setAnchorPoint(ccp(0,0));
     addChild(label1, 0, kTagBitmapAtlas1);
 
@@ -966,18 +963,4 @@ LabelTTFChinese::LabelTTFChinese()
 string LabelTTFChinese::title()
 {
 	return "Testing CCLabelTTF with Chinese character";
-}
-
-LabelBMFontChinese::LabelBMFontChinese()
-{
-    CCSize size = CCDirector::sharedDirector()->getWinSize();
-    CCLabelBMFont* pLable = CCLabelBMFont::labelWithString("abc中国中国efghi中国中国JKLMn中国", "fonts/bitmapFontChinese.fnt", 300, CCTextAlignmentRight);
-    pLable->setLineBreakWithoutSpace(true);
-	pLable->setPosition(ccp(size.width / 2, size.height /2));
-    this->addChild(pLable);
-}
-
-string LabelBMFontChinese::title()
-{
-    return "Testing CCLabelBMFont with Chinese character";
 }
