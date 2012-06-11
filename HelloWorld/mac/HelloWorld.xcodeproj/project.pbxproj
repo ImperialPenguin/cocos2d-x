@@ -1560,6 +1560,7 @@
 				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"COCOS2D_DEBUG=1",
 					USE_FILE32API,
 					"DEBUG=1",
 					"$(inherited)",

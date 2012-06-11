@@ -3536,7 +3536,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cocos2d/cocos2d-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
+					"COCOS2D_DEBUG=1",
 					"$(inherited)",
 					USE_FILE32API,
 				);
