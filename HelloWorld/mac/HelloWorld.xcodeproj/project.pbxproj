@@ -260,6 +260,7 @@
 		7F927DC51583E3BF002E62A1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9269781583C23B002E62A1 /* OpenGL.framework */; };
 		7F927DC61583E3CF002E62A1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9258E21583BF47002E62A1 /* Cocoa.framework */; };
 		7F927DC71583E3DD002E62A1 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9258E51583BF47002E62A1 /* AppKit.framework */; };
+		7F9F324915856DC700D0ED9E /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9F324815856DC700D0ED9E /* libfreetype.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -526,6 +527,7 @@
 		7F927D8F1583CC8D002E62A1 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldScene.h; sourceTree = "<group>"; };
 		7F927DB21583DEDB002E62A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F927DC31583E3AA002E62A1 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		7F9F324815856DC700D0ED9E /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../../cocos2dx/platform/third_party/mac/libraries/libfreetype.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -556,6 +558,7 @@
 				7F927DC51583E3BF002E62A1 /* OpenGL.framework in Frameworks */,
 				7F927DC41583E3AA002E62A1 /* CoreFoundation.framework in Frameworks */,
 				7F927DB41583DEDB002E62A1 /* Foundation.framework in Frameworks */,
+				7F9F324915856DC700D0ED9E /* libfreetype.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +614,7 @@
 			children = (
 				7F4DB5601583E6B3004F1BD4 /* libz.dylib */,
 				7F4DB55E1583E6A4004F1BD4 /* libxml2.dylib */,
+				7F9F324815856DC700D0ED9E /* libfreetype.a */,
 				7F927DC31583E3AA002E62A1 /* CoreFoundation.framework */,
 				7F927DB21583DEDB002E62A1 /* Foundation.framework */,
 				7F9269781583C23B002E62A1 /* OpenGL.framework */,
@@ -1561,11 +1565,15 @@
 					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libfreetype2/",
 					"$(SDKROOT)/usr/include/libxml2",
 					"$(SRCROOT)/../../cocos2dx",
 				);
 				LD_DYLIB_INSTALL_NAME = "";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+				);
 				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1581,11 +1589,15 @@
 					USE_FILE32API,
 				);
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libfreetype2/",
 					"$(SDKROOT)/usr/include/libxml2",
 					"$(SRCROOT)/../../cocos2dx",
 				);
 				LD_DYLIB_INSTALL_NAME = "";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+				);
 				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

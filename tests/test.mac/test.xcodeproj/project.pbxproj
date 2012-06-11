@@ -3546,8 +3546,8 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
 					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3568,8 +3568,8 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
 					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
