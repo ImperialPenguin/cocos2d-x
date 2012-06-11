@@ -12,7 +12,6 @@
 
 
 @implementation AppController
-@synthesize window, glView;
 
 // cocos2d application instance
 static AppDelegate s_sharedApplication;
@@ -30,7 +29,9 @@ static AppDelegate s_sharedApplication;
     [window setTitle:@"Cocos2d-x Tests"];
     
     [window makeKeyAndOrderFront:self];
+    
     cocos2d::CCApplication::sharedApplication().run();
+    cocos2d::CCDirector::sharedDirector()->setDeviceOrientation(cocos2d::CCDeviceOrientationLandscapeLeft);
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication
@@ -41,8 +42,6 @@ static AppDelegate s_sharedApplication;
 - (void)dealloc
 {
 	cocos2d::CCDirectorMac::sharedDirector()->end();
-	[window release];
-    [glView release];
 	[super dealloc];
 }
 

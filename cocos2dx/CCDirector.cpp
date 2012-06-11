@@ -26,11 +26,11 @@ THE SOFTWARE.
 
 #include "cocoa/CCNS.h"
 #include "platform.h"
-//#if	(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-#include "CCDirectorMac.h"
-//#else
-#include "CCDirector.h"
-//#endif
+#if	(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    #include "CCDirectorMac.h"
+#else
+    #include "CCDirector.h"
+#endif
 #include "CCScene.h"
 #include "CCMutableArray.h"
 #include "CCScheduler.h"
@@ -421,6 +421,10 @@ CCPoint CCDirector::convertToGL(const CCPoint& obPoint)
 	float newX = s.width - obPoint.x;
 
 	CCPoint ret = CCPointZero;
+
+#if	(CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    ret = ccp(obPoint.x, newY);
+#else
 	switch (m_eDeviceOrientation)
 	{
 	case CCDeviceOrientationPortrait:
@@ -438,6 +442,7 @@ CCPoint CCDirector::convertToGL(const CCPoint& obPoint)
 		ret.y = newX;
 		break;
 	}
+#endif
 	
 	return ret;
 }
@@ -936,13 +941,18 @@ void CCDirector::setDeviceOrientation(ccDeviceOrientation kDeviceOrientation)
 	eNewOrientation = (ccDeviceOrientation)CCApplication::sharedApplication().setOrientation(
         (CCApplication::Orientation)kDeviceOrientation);
 
+// force a view update on mac    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    if (0)
+#else
 	if (m_eDeviceOrientation != eNewOrientation)
+#endif
 	{
 		m_eDeviceOrientation = eNewOrientation;
-	}
+    }
     else
-    {
-        // this logic is only run on win32 now
+    { 
+        // this logic is only run on win32 and mac now
         // On win32,the return value of CCApplication::setDeviceOrientation is always kCCDeviceOrientationPortrait
         // So,we should calculate the Projection and window size again.
         m_obWinSizeInPoints = m_pobOpenGLView->getSize();

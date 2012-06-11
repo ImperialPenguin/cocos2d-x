@@ -15,9 +15,6 @@
     EAGLView	*glView;
 }
 
-@property (nonatomic, retain) NSWindow *window;
-@property (nonatomic, retain) EAGLView *glView;
-
 - (IBAction)toggleFullScreen:(id)sender;
 
 @end

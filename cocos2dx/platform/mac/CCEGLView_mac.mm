@@ -72,8 +72,8 @@ void CCEGLView::release()
 	[CCDirectorCaller destroy];
 	
 	// destroy EAGLView
-	[[EAGLView sharedEGLView] removeFromSuperview];
-	
+//	[[EAGLView sharedEGLView] removeFromSuperview];
+    
 	_exit(0);
 }
 

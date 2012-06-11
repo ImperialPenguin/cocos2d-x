@@ -23,9 +23,8 @@
  ****************************************************************************/
 
 #import "CCApplication_mac.h"
-
-//#import <Cocoa/Cocoa.h>
-
+#import "cocos2d.h"
+#import "EAGLView_mac.h"
 #import "CCGeometry.h"
 #import "CCDirectorCaller.h"
 
@@ -61,32 +60,26 @@ void CCApplication::setAnimationInterval(double interval)
 
 CCApplication::Orientation CCApplication::setOrientation(Orientation eOritation)
 {
-#if 0
-	NSApplication * app = [NSApplication sharedApplication];
-    UIInterfaceOrientation newOrientation;
-    switch (eOritation)
-    {
-    case kOrientationPortrait:
-        newOrientation = UIInterfaceOrientationPortrait;
-        break;
-    case kOrientationPortraitUpsideDown:
-        newOrientation = UIInterfaceOrientationPortraitUpsideDown;
-        break;
-    case kOrientationLandscapeLeft:
-        newOrientation = UIInterfaceOrientationLandscapeRight;
-        break;
-    case kOrientationLandscapeRight:
-        newOrientation = UIInterfaceOrientationLandscapeLeft;
-        break;
-    default:
-        newOrientation = UIInterfaceOrientationPortrait;
-        break;
-    }
-    if (newOrientation != [app statusBarOrientation])
-    {
-        [app setStatusBarOrientation: newOrientation];
-    }
-#endif
+    NSRect rect = [[EAGLView sharedEGLView] frame];
+
+    int width = MAX(rect.size.width, rect.size.height);
+    int height = MIN(rect.size.width, rect.size.height);
+    int x = [[[EAGLView sharedEGLView] window] frame].origin.x;
+    int y = [[[EAGLView sharedEGLView] window] frame].origin.y;
+
+    if (eOritation == CCDeviceOrientationPortrait || eOritation == CCDeviceOrientationPortraitUpsideDown)
+	{
+		width = MIN(rect.size.width, rect.size.height);
+		height = MAX(rect.size.width, rect.size.height);
+	}
+
+    rect = NSMakeRect(x, y, width , height+22);
+    [[[EAGLView sharedEGLView] window] setFrame:rect display:true animate:true];
+    [[[EAGLView sharedEGLView] window] display]; 
+    
+    rect = NSMakeRect(0, 0, width , height);
+    [[EAGLView sharedEGLView] setFrame:rect];
+    
     return eOritation;
 }
 
