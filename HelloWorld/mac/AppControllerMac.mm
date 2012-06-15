@@ -21,25 +21,23 @@ static AppDelegate s_sharedApplication;
 {
 //    cocos2d::CCDirectorMac *director = (cocos2d::CCDirectorMac*) cocos2d::CCDirectorMac::sharedDirector();
 //    
-    NSRect rect = NSMakeRect(650, 350, 480, 320);    
+    NSRect rect = NSMakeRect(650, 350, 800, 480);    
     window = [[NSWindow alloc] initWithContentRect: rect styleMask:( NSClosableWindowMask | NSTitledWindowMask) backing:NSBackingStoreBuffered defer:YES];
     
+    rect = NSMakeRect(0, 0, 800, 480);    
     glView = [[EAGLView alloc] initWithFrame:rect];
     [glView initWithFrame:rect];
     [window setContentView:glView];
-    [window setTitle:@"Cocos2d-x Hello World"];
+    
+    cocos2d::CCEGLView * pMainWnd = new cocos2d::CCEGLView();
+    pMainWnd->Create(800, 480, 480, 320);
+    
+    [window setTitle:@"Cocos2d-x Tests"];
     
     [window makeKeyAndOrderFront:self];
+    
     cocos2d::CCApplication::sharedApplication().run();
-//	director->setOpenGLView(glView_);
-//
-//	// EXPERIMENTAL stuff.
-//	// 'Effects' don't work correctly when autoscale is turned on.
-//	// Use kCCDirectorResize_NoScale if you don't want auto-scaling.
-//	director->setResizeMode(kCCDirectorResize_AutoScale);
-//	
-//	// Enable "moving" mouse event. Default no.
-//	[window_ setAcceptsMouseMovedEvents:NO];
+    cocos2d::CCDirector::sharedDirector()->setDeviceOrientation(cocos2d::CCDeviceOrientationLandscapeLeft);
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication

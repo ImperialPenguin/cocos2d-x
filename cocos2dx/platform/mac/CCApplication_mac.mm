@@ -79,7 +79,8 @@ CCApplication::Orientation CCApplication::setOrientation(Orientation eOritation)
     
     rect = NSMakeRect(0, 0, width , height);
     [[EAGLView sharedEGLView] setFrame:rect];
-    
+
+    cocos2d::CCDirector::sharedDirector()->getOpenGLView()->setDeviceOrientation(eOritation);
     return eOritation;
 }
 

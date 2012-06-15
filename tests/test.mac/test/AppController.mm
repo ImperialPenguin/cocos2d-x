@@ -9,6 +9,7 @@
 #include "AppDelegate.h"
 #import "AppController.h"
 #include "CCDirectorMac.h"
+#include "CCEGLView.h"
 
 
 @implementation AppController
@@ -20,12 +21,17 @@ static AppDelegate s_sharedApplication;
 {
     //    cocos2d::CCDirectorMac *director = (cocos2d::CCDirectorMac*) cocos2d::CCDirectorMac::sharedDirector();
     //    
-    NSRect rect = NSMakeRect(650, 350, 480, 320);    
+    NSRect rect = NSMakeRect(650, 350, 800, 480);    
     window = [[NSWindow alloc] initWithContentRect: rect styleMask:( NSClosableWindowMask | NSTitledWindowMask) backing:NSBackingStoreBuffered defer:YES];
     
+    rect = NSMakeRect(0, 0, 800, 480);    
     glView = [[EAGLView alloc] initWithFrame:rect];
     [glView initWithFrame:rect];
     [window setContentView:glView];
+    
+    cocos2d::CCEGLView * pMainWnd = new cocos2d::CCEGLView();
+    pMainWnd->Create(800, 480, 480, 320);
+
     [window setTitle:@"Cocos2d-x Tests"];
     
     [window makeKeyAndOrderFront:self];

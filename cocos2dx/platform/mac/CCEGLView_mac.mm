@@ -25,27 +25,88 @@ THE SOFTWARE.
 #include "CCDirectorCaller.h"
 #include "CCEGLView_mac.h"
 #include "CCSet.h"
+#include "ccMacros.h"
+#include "CCDirector.h"
 #include "CCTouch.h"
 #include "CCTouchDispatcher.h"
 
 namespace cocos2d {
 
+static CCEGLView * s_pMainWindow;    
+    
 CCEGLView::CCEGLView()
 : m_pDelegate(0)
 {
-
+    m_sSizeInPoint.width = m_sSizeInPoint.height = 0;
+    s_pMainWindow = NULL;
 }
 
 CCEGLView::~CCEGLView()
 {
 
 }
-
-cocos2d::CCSize  CCEGLView::getSize()
+    
+bool CCEGLView::Create(int ww, int wh, int w, int h)
 {
-	cocos2d::CCSize size([[EAGLView sharedEGLView] getWidth], [[EAGLView sharedEGLView] getHeight]);
+    bool bRet = false;
 
-	return size;
+    m_sSizeInPixel.width = ww;
+    m_sSizeInPixel.height = wh;
+    
+    do 
+    {        
+        m_sSizeInPoint.width = (float)w;
+        m_sSizeInPoint.height = (float)h;   
+        
+        resize(w, h);
+                
+        s_pMainWindow = this;
+        bRet = true;
+    } while (0);
+    
+    // calculate the factor and the rect of viewport	
+    m_fScreenScaleFactor =  MIN((float)m_sSizeInPixel.width / m_sSizeInPoint.width,
+                                (float)m_sSizeInPixel.height / m_sSizeInPoint.height);
+    
+    int viewPortW = (int)(m_sSizeInPoint.width * m_fScreenScaleFactor);
+    int viewPortH = (int)(m_sSizeInPoint.height * m_fScreenScaleFactor);
+    
+    m_rcViewPort.origin.x = (m_sSizeInPixel.width - viewPortW) / 2;
+    m_rcViewPort.origin.y = (m_sSizeInPixel.height - viewPortH) / 2;
+    m_rcViewPort.size.width = viewPortW;
+    m_rcViewPort.size.height = viewPortH;
+    
+    return bRet;
+}    
+    
+    
+void CCEGLView::setDeviceOrientation(int eOritation)
+{    
+    if (eOritation == CCDeviceOrientationPortrait || eOritation == CCDeviceOrientationPortraitUpsideDown)
+    {
+        int width = MIN(m_sSizeInPixel.width, m_sSizeInPixel.height);
+        m_sSizeInPixel.height = MAX(m_sSizeInPixel.width, m_sSizeInPixel.height);
+        m_sSizeInPixel.width = width;
+        width = MIN(m_sSizeInPoint.width, m_sSizeInPoint.height);
+        m_sSizeInPoint.height = MAX(m_sSizeInPoint.width, m_sSizeInPoint.height);
+        m_sSizeInPoint.width = width;
+        resize(m_sSizeInPoint.width, m_sSizeInPoint.height);
+    }
+    else
+    {
+        int width = MAX(m_sSizeInPixel.width, m_sSizeInPixel.height);
+        m_sSizeInPixel.height = MIN(m_sSizeInPixel.width, m_sSizeInPixel.height);
+        m_sSizeInPixel.width = width;
+        width = MAX(m_sSizeInPoint.width, m_sSizeInPoint.height);
+        m_sSizeInPoint.height = MIN(m_sSizeInPoint.width, m_sSizeInPoint.height);
+        m_sSizeInPoint.width = width;
+        resize(m_sSizeInPoint.width, m_sSizeInPoint.height);
+    }
+}    
+
+CCSize CCEGLView::getSize()
+{
+    return CCSize(m_sSizeInPoint.width, m_sSizeInPoint.height);
 }
 
 bool CCEGLView::isOpenGLReady()
@@ -70,6 +131,7 @@ void CCEGLView::setContentScaleFactor(float contentScaleFactor)
 void CCEGLView::release()
 {
 	[CCDirectorCaller destroy];
+    s_pMainWindow = NULL;
 	
 	// destroy EAGLView
 //	[[EAGLView sharedEGLView] removeFromSuperview];
@@ -90,6 +152,14 @@ void CCEGLView::swapBuffers()
 void CCEGLView::setNeedsDisplay(bool flag)
 {
 	[[EAGLView sharedEGLView] setNeedsDisplay:flag];
+}
+    
+float CCEGLView::getScaledX(float x) {
+    return (x - m_rcViewPort.origin.x) / m_fScreenScaleFactor;
+}
+    
+float CCEGLView::getScaledY(float y) {
+    return (y - m_rcViewPort.origin.y) / m_fScreenScaleFactor;
 }
 	
 void CCEGLView::touchesBegan(CCSet *set)
@@ -122,12 +192,20 @@ void CCEGLView::touchesCancelled(CCSet *set)
 
 void CCEGLView::setViewPortInPoints(float x, float y, float w, float h)
 {
-    glViewport((GLint)x, (GLint)y, (GLint)w, (GLint)h);
+    float factor = m_fScreenScaleFactor / CC_CONTENT_SCALE_FACTOR();
+    glViewport((GLint)(x * factor) + m_rcViewPort.origin.x,
+               (GLint)(y * factor) + m_rcViewPort.origin.y,
+               (GLint)(w * factor),
+               (GLint)(h * factor));
 }
 
 void CCEGLView::setScissorInPoints(float x, float y, float w, float h)
 {
-    glScissor((GLint)x, (GLint)y, (GLint)w, (GLint)h);
+    float factor = m_fScreenScaleFactor / CC_CONTENT_SCALE_FACTOR();
+    glScissor((GLint)(x * factor) + m_rcViewPort.origin.x,
+               (GLint)(y * factor) + m_rcViewPort.origin.y,
+               (GLint)(w * factor),
+               (GLint)(h * factor));
 }
 
 void CCEGLView::setIMEKeyboardState(bool bOpen)
@@ -141,6 +219,21 @@ void CCEGLView::setIMEKeyboardState(bool bOpen)
         [[EAGLView sharedEGLView] resignFirstResponder];
     }
 }
+    
+void CCEGLView::resize(int width, int height)
+{
+    // calculate the factor and the rect of viewport	
+    m_fScreenScaleFactor =  MIN((float)m_sSizeInPixel.width / m_sSizeInPoint.width,
+                                (float)m_sSizeInPixel.height / m_sSizeInPoint.height);
+    
+    int viewPortW = (int)(m_sSizeInPoint.width * m_fScreenScaleFactor);
+    int viewPortH = (int)(m_sSizeInPoint.height * m_fScreenScaleFactor);
+    
+    m_rcViewPort.origin.x = (m_sSizeInPixel.width - viewPortW) / 2;
+    m_rcViewPort.origin.y = (m_sSizeInPixel.height - viewPortH) / 2;
+    m_rcViewPort.size.width = viewPortW;
+    m_rcViewPort.size.height = viewPortH;
+}    
 
 void CCEGLView::setMultiTouchMask(bool mask)
 {
@@ -152,8 +245,8 @@ void CCEGLView::setMultiTouchMask(bool mask)
 
 CCEGLView& CCEGLView::sharedOpenGLView()
 {
-    static CCEGLView instance;
-    return instance;
+    CC_ASSERT(s_pMainWindow);
+    return *s_pMainWindow;
 }
 
 } // end of namespace cocos2d;

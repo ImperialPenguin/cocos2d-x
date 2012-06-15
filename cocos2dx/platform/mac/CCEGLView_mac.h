@@ -25,6 +25,7 @@ THE SOFTWARE.
 #ifndef __CC_EGLVIEW_IPHONE_H__
 #define __CC_EGLVIEW_IPHONE_H__
 
+#include "CCGeometry.h"
 #include "CCCommon.h"
 
 namespace   cocos2d {
@@ -39,15 +40,21 @@ public:
     CCEGLView();
    ~CCEGLView();
 
+    bool    Create(int ww, int wh, int w, int h);
+    void    setDeviceOrientation(int eOritation);
     CCSize  getSize();
     bool    isOpenGLReady();
     bool    canSetContentScaleFactor();
     void    setContentScaleFactor(float contentScaleFactor);
     
+    float   getScaledX(float x);
+    float   getScaledY(float y);    
+    
     // keep compatible
     void    release();
     void    setTouchDelegate(EGLTouchDelegate * pDelegate);
     void    swapBuffers();
+    void    resize(int width, int height);
     void    setViewPortInPoints(float x, float y, float w, float h);
     void    setScissorInPoints(float x, float y, float w, float h);
 	void	setNeedsDisplay(bool flag);
@@ -55,6 +62,7 @@ public:
     void touchesBegan(CCSet *set);
     void touchesMoved(CCSet *set);
     void touchesEnded(CCSet *set);
+
     void touchesCancelled(CCSet *set);
     
     void setIMEKeyboardState(bool bOpen);
@@ -64,6 +72,13 @@ public:
         
 private:
     EGLTouchDelegate *m_pDelegate;
+    
+    float               m_fScreenScaleFactor;
+    CCRect              m_rcViewPort;
+    
+	CCSize  			m_sSizeInPixel;
+	CCSize 			 	m_sSizeInPoint;
+	
 };
 	
 }   // end of namespace   cocos2d

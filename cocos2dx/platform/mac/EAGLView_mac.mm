@@ -152,7 +152,7 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 -(void) swapBuffers
 {
 }
-
+/*
 - (void) reshape
 {
 	// We draw on a secondary thread through the display link
@@ -171,9 +171,9 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 	director->drawScene();
 //	[self setNeedsDisplay:YES];
 	
-	CGLUnlockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
+	CGLUnlockContext((CGLContextObj)[[self openGLContext] CGLContextObj]); 
 }
-
+*/
 - (void) dealloc
 {	
 	CFRelease(touchesIntergerDict);
@@ -198,7 +198,7 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 #if 0
 	DISPATCH_EVENT(theEvent, _cmd);
 #else
-	cocos2d::CCSet set;
+    cocos2d::CCSet set;
     cocos2d::CCTouch *pTouch;
 
 	NSNumber *index = (NSNumber*)CFDictionaryGetValue(touchesIntergerDict, [NSNumber numberWithInt:11]);
@@ -219,13 +219,12 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 	NSPoint event_location = [theEvent locationInWindow];
 	NSPoint local_point = [self convertPoint:event_location fromView:nil];
 	
-	float x = local_point.x;
-	float y = [self getHeight] - local_point.y;
+	float x = cocos2d::CCDirector::sharedDirector()->getOpenGLView()->getScaledX(local_point.x);
+	float y = cocos2d::CCDirector::sharedDirector()->getOpenGLView()->getScaledY([self getHeight] - local_point.y);
 	pTouch->SetTouchInfo(x, y);
+	set.addObject(pTouch);
 	
 	CFDictionaryAddValue(touchesIntergerDict, [NSNumber numberWithInt:11], [NSNumber numberWithInt:unUsedIndex]);
-	
-	set.addObject(pTouch);
 	
 	cocos2d::CCDirector::sharedDirector()->getOpenGLView()->touchesBegan(&set);
 #endif
@@ -258,8 +257,8 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 	NSPoint event_location = [theEvent locationInWindow];
 	NSPoint local_point = [self convertPoint:event_location fromView:nil];
 	
-	float x = local_point.x;
-	float y = [self getHeight] - local_point.y;
+	float x = cocos2d::CCDirector::sharedDirector()->getOpenGLView()->getScaledX(local_point.x);
+	float y = cocos2d::CCDirector::sharedDirector()->getOpenGLView()->getScaledY([self getHeight] - local_point.y);
 	pTouch->SetTouchInfo(x, y);
 	
 	set.addObject(pTouch);
@@ -290,8 +289,8 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 	NSPoint event_location = [theEvent locationInWindow];
 	NSPoint local_point = [self convertPoint:event_location fromView:nil];
 	
-	float x = local_point.x;
-	float y = [self getHeight] - local_point.y;
+	float x = cocos2d::CCDirector::sharedDirector()->getOpenGLView()->getScaledX(local_point.x);
+	float y = cocos2d::CCDirector::sharedDirector()->getOpenGLView()->getScaledY([self getHeight] - local_point.y);
 	pTouch->SetTouchInfo(x, y);
 	
 	set.addObject(pTouch);
