@@ -53,7 +53,7 @@ enum  {
 	kCCImplementsTouchesBegan		= 1 << 13,
 	kCCImplementsTouchesMoved		= 1 << 14,
 	kCCImplementsTouchesEnded		= 1 << 15,
-	kCCImplementsTouchesCancelled	        = 1 << 16,
+	kCCImplementsTouchesCancelled   = 1 << 16,
 
 	// keyboard
 	kCCImplementsKeyUp				= 1 << 0,
@@ -118,7 +118,7 @@ static int		eventQueueCount;
 		// delegates
 		keyboardDelegates_ = NULL;
 		mouseDelegates_ = NULL;
-                touchDelegates_ = NULL;
+        touchDelegates_ = NULL;
 		
 #if	CC_DIRECTOR_MAC_USE_DISPLAY_LINK_THREAD
 		eventQueueCount = 0;
@@ -138,7 +138,6 @@ static int		eventQueueCount;
 -(void) addDelegate:(id)delegate priority:(NSInteger)priority flags:(NSUInteger)flags list:(tListEntry**)list
 {
 	tListEntry *listElement = (tListEntry *)malloc( sizeof(*listElement) );
-	
 	listElement->delegate = [delegate retain];
 	listElement->priority = priority;
 	listElement->flags = flags;
@@ -550,7 +549,6 @@ static int		eventQueueCount;
 {
 	if( dispatchEvents_ ) {
 		tListEntry *entry, *tmp;
-		
 		DL_FOREACH_SAFE( touchDelegates_, entry, tmp ) {
 			if ( entry->flags & kCCImplementsTouchesBegan) {
 				void *swallows = [entry->delegate performSelector:@selector(ccTouchesBeganWithEvent:) withObject:event];
