@@ -30,14 +30,16 @@
 // Only compile this code on Mac. These files should not be included on your iOS project.
 // But in case they are included, it won't be compiled.
 #import <Availability.h>
+#import <OpenGL/gl.h>
+#import <DDHidLib/DDHidLib.h>
 
 #import "EAGLView_mac.h"
-#import <OpenGL/gl.h>
 #import "CCDirectorMac.h"
 #import "ccConfig.h"
 #import "CCSet.h"
 #import "CCTouch.h"
 #import "CCIMEDispatcher.h"
+#import "CCAccelerometer_mac.h"
 
 
 #define MAX_TOUCHES     11
@@ -103,9 +105,26 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 	
 	touchesIntergerDict = CFDictionaryCreateMutable(kCFAllocatorDefault, 4, NULL, NULL);
 	indexBitsUsed = 0x00000000;
+
+    // allJoysticks returns an array of all connected joysticks
+    joysticks = [[DDHidJoystick allJoysticks] retain];
+    
+    // we want to be the delegate of the joysticks
+    [joysticks makeObjectsPerformSelector:@selector(setDelegate:) withObject:self];
+    
+    // start listening to all joystick events
+    [joysticks makeObjectsPerformSelector:@selector(startListening) withObject:nil];
 	
+    joystickX = joystickY = joystickZ = 0;
+    joyTimer = [NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(joystickHandler) userInfo:nil repeats:YES];
+    
+    
 	view = self;
 	return self;
+}
+
+-(void) joystickHandler{
+    cocos2d::CCAccelerometer::sharedAccelerometer()->update(joystickX, joystickY, joystickZ, time(nil));
 }
 
 -(int) getUnUsedIndex
@@ -176,9 +195,57 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 */
 - (void) dealloc
 {	
+    [joyTimer invalidate];
 	CFRelease(touchesIntergerDict);
 	[super dealloc];
 }
+
+
+#pragma mark EAGLView - Joystick events
+
+- (void)ddhidJoystick:(DDHidJoystick *)joystick buttonDown:(unsigned)buttonNumber
+{
+    //not used yet
+}
+
+- (void)ddhidJoystick:(DDHidJoystick *)joystick buttonUp:(unsigned)buttonNumber
+{
+    //not used yet
+}
+
+
+#define THRESHOLD   2<<13	// this threshold defines the dead zone of analog sticks
+
+- (void)ddhidJoystick:(DDHidJoystick *)joystick stick:(unsigned)stick xChanged:(int)value
+{
+    if(value < -THRESHOLD || value > THRESHOLD)
+        joystickX = value;
+    else 
+        joystickX = 0;
+}
+
+- (void)ddhidJoystick:(DDHidJoystick *)joystick stick:(unsigned)stick yChanged:(int)value
+{
+    if(value < -THRESHOLD || value > THRESHOLD)
+        joystickY = value;
+    else 
+        joystickY = 0;
+}
+
+- (void)ddhidJoystick:(DDHidJoystick *)joystick stick:(unsigned)stick otherAxis:(unsigned)otherAxis valueChanged:(int) value
+{
+    if(value < -THRESHOLD || value > THRESHOLD)
+        if (otherAxis == 0)
+            joystickZ = value;
+        else 
+            joystickZ = 0;
+}
+
+- (void)ddhidJoystick:(DDHidJoystick *)joystick stick:(unsigned)stick povNumber:(unsigned)povNumber valueChanged:(int)value
+{
+    //not used yet
+}
+
 
 #if CC_DIRECTOR_MAC_USE_DISPLAY_LINK_THREAD
 #define DISPATCH_EVENT(__event__, __selector__) [eventDelegate_ queueEvent:__event__ selector:__selector__];

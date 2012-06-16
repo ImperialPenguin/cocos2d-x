@@ -35,14 +35,17 @@ public:
     CCAccelerometer();
     ~CCAccelerometer();
 
-    static CCAccelerometer* sharedAccelerometer() { return NULL; };
+    static CCAccelerometer* sharedAccelerometer();
 
-    void removeDelegate(CCAccelerometerDelegate* pDelegate) { CC_UNUSED_PARAM(pDelegate); };
-    void addDelegate(CCAccelerometerDelegate* pDelegate) { CC_UNUSED_PARAM(pDelegate); };
-    void setDelegate(CCAccelerometerDelegate* pDelegate){ CC_UNUSED_PARAM(pDelegate); };
+    void removeDelegate(CCAccelerometerDelegate* pDelegate);
+    void addDelegate(CCAccelerometerDelegate* pDelegate);
+    void setDelegate(CCAccelerometerDelegate* pDelegate);
+    void CCAccelerometer::update(int x, int y, int z, long timeStamp);
 
 private:
-    static CCAccelerometer* m_spUIAccelerometer;
+	static CCAccelerometer*  m_spCCAccelerometer;
+	CCAccelerometerDelegate* m_pAccelDelegate;
+	CCAcceleration 			 m_accelerationValue;    
 };
 
 }//namespace   cocos2d 

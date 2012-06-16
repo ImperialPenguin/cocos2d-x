@@ -49,7 +49,6 @@
 - (void)mouseEntered:(NSEvent *)theEvent;
 - (void)mouseExited:(NSEvent *)theEvent;
 
-
 // Keyboard
 - (void)keyDown:(NSEvent *)theEvent;
 - (void)keyUp:(NSEvent *)theEvent;
@@ -76,6 +75,10 @@
 @private
 	unsigned int				indexBitsUsed;
 	CFMutableDictionaryRef		touchesIntergerDict;
+    
+    NSArray *joysticks;
+    NSTimer *joyTimer;
+    int joystickX, joystickY, joystickZ;
 }
 
 @property (nonatomic, readwrite, assign) id<MacEventDelegate> eventDelegate;
@@ -92,6 +95,7 @@
 // private
 +(void) load_;
 
+-(void) joystickHandler;
 -(int) getWidth;
 -(int) getHeight;
 -(int) getUnUsedIndex;

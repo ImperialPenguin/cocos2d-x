@@ -522,7 +522,24 @@
 		7F9F32191584536500D0ED9E /* Hello.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F9F32101584536500D0ED9E /* Hello.png */; };
 		7F9F321A1584536500D0ED9E /* music.mid in Resources */ = {isa = PBXBuildFile; fileRef = 7F9F32111584536500D0ED9E /* music.mid */; };
 		7F9F324215856BD600D0ED9E /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9F324115856BD600D0ED9E /* libfreetype.a */; };
+		7F9F326F158C05B500D0ED9E /* CCAccelerometer_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F9F326E158C05B200D0ED9E /* CCAccelerometer_mac.cpp */; };
+		7F9F3278158C254E00D0ED9E /* DDHidLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9F3277158C254E00D0ED9E /* DDHidLib.framework */; };
+		7F9F3279158C26BF00D0ED9E /* DDHidLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9F3277158C254E00D0ED9E /* DDHidLib.framework */; };
+		7F9F327B158C274500D0ED9E /* DDHidLib.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7F9F3277158C254E00D0ED9E /* DDHidLib.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7F9F327A158C273100D0ED9E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7F9F327B158C274500D0ED9E /* DDHidLib.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7F4DBA46158422B3004F1BD4 /* test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1178,6 +1195,8 @@
 		7F9F32101584536500D0ED9E /* Hello.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Hello.png; path = ../tests/Resources/Hello.png; sourceTree = "<group>"; };
 		7F9F32111584536500D0ED9E /* music.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; name = music.mid; path = ../tests/Resources/music.mid; sourceTree = "<group>"; };
 		7F9F324115856BD600D0ED9E /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../../cocos2dx/platform/third_party/mac/libraries/libfreetype.a; sourceTree = "<group>"; };
+		7F9F326E158C05B200D0ED9E /* CCAccelerometer_mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCAccelerometer_mac.cpp; sourceTree = "<group>"; };
+		7F9F3277158C254E00D0ED9E /* DDHidLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DDHidLib.framework; path = ../../cocos2dx/platform/third_party/mac/libraries/DDHidLib.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1198,6 +1217,7 @@
 				7F9F31E81584331A00D0ED9E /* libchipmunk.a in Frameworks */,
 				7F9F31F015843EBC00D0ED9E /* libz.dylib in Frameworks */,
 				7F9F31F115843EBF00D0ED9E /* libxml2.dylib in Frameworks */,
+				7F9F3279158C26BF00D0ED9E /* DDHidLib.framework in Frameworks */,
 				7F9F31F315843F0500D0ED9E /* OpenAL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1215,6 +1235,7 @@
 				7F4DCB8715842544004F1BD4 /* AppKit.framework in Frameworks */,
 				7F4DCB8815842544004F1BD4 /* QuartzCore.framework in Frameworks */,
 				7F9F324215856BD600D0ED9E /* libfreetype.a in Frameworks */,
+				7F9F3278158C254E00D0ED9E /* DDHidLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1278,6 +1299,7 @@
 				7F4DCB7B15842538004F1BD4 /* libz.dylib */,
 				7F4DCB7D15842544004F1BD4 /* libxml2.dylib */,
 				7F9F324115856BD600D0ED9E /* libfreetype.a */,
+				7F9F3277158C254E00D0ED9E /* DDHidLib.framework */,
 				7F9F31F215843F0500D0ED9E /* OpenAL.framework */,
 				7F9F31EE15843E9100D0ED9E /* AudioToolbox.framework */,
 				7F4DCB7E15842544004F1BD4 /* CoreFoundation.framework */,
@@ -1623,6 +1645,7 @@
 			isa = PBXGroup;
 			children = (
 				7F4DBB8115842352004F1BD4 /* CCAccelerometer_mac.h */,
+				7F9F326E158C05B200D0ED9E /* CCAccelerometer_mac.cpp */,
 				7F4DBB8215842352004F1BD4 /* CCApplication_mac.h */,
 				7F4DBB8315842352004F1BD4 /* CCApplication_mac.mm */,
 				7F4DBB8415842352004F1BD4 /* CCCommon_mac.mm */,
@@ -2980,6 +3003,7 @@
 				7F4DBA42158422B3004F1BD4 /* Sources */,
 				7F4DBA43158422B3004F1BD4 /* Frameworks */,
 				7F4DBA44158422B3004F1BD4 /* Resources */,
+				7F9F327A158C273100D0ED9E /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -3316,6 +3340,7 @@
 				7F4DCB6F15842357004F1BD4 /* CCTMXXMLParser.cpp in Sources */,
 				7F4DCB7015842357004F1BD4 /* CCTouchDispatcher.cpp in Sources */,
 				7F4DCB7115842357004F1BD4 /* CCTouchHandler.cpp in Sources */,
+				7F9F326F158C05B500D0ED9E /* CCAccelerometer_mac.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3495,6 +3520,10 @@
 		7F4DBA65158422B4004F1BD4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test/test-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3514,6 +3543,10 @@
 		7F4DBA66158422B4004F1BD4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test/test-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3533,6 +3566,10 @@
 		7F4DBA741584233B004F1BD4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cocos2d/cocos2d-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3556,6 +3593,10 @@
 		7F4DBA751584233B004F1BD4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cocos2d/cocos2d-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (

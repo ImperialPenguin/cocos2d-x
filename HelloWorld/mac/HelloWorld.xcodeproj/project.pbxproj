@@ -261,6 +261,10 @@
 		7F927DC61583E3CF002E62A1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9258E21583BF47002E62A1 /* Cocoa.framework */; };
 		7F927DC71583E3DD002E62A1 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9258E51583BF47002E62A1 /* AppKit.framework */; };
 		7F9F324915856DC700D0ED9E /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9F324815856DC700D0ED9E /* libfreetype.a */; };
+		7F9F3281158C301300D0ED9E /* DDHidLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9F3280158C301300D0ED9E /* DDHidLib.framework */; };
+		7F9F3282158C301300D0ED9E /* DDHidLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9F3280158C301300D0ED9E /* DDHidLib.framework */; };
+		7F9F3285158C302E00D0ED9E /* DDHidLib.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7F9F3280158C301300D0ED9E /* DDHidLib.framework */; };
+		7F9F3287158C307400D0ED9E /* CCAccelerometer_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F9F3286158C307400D0ED9E /* CCAccelerometer_mac.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -272,6 +276,19 @@
 			remoteInfo = "cocos2d-x";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7F9F3284158C302400D0ED9E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7F9F3285158C302E00D0ED9E /* DDHidLib.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7F4DB5511583E4E3004F1BD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = SOURCE_ROOT; };
@@ -528,6 +545,8 @@
 		7F927DB21583DEDB002E62A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F927DC31583E3AA002E62A1 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		7F9F324815856DC700D0ED9E /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../../cocos2dx/platform/third_party/mac/libraries/libfreetype.a; sourceTree = "<group>"; };
+		7F9F3280158C301300D0ED9E /* DDHidLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DDHidLib.framework; path = ../../cocos2dx/platform/third_party/mac/libraries/DDHidLib.framework; sourceTree = "<group>"; };
+		7F9F3286158C307400D0ED9E /* CCAccelerometer_mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCAccelerometer_mac.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -543,6 +562,7 @@
 				7F4DB6591583F7AF004F1BD4 /* libcocos2d-x.a in Frameworks */,
 				7F4DB65A1583F7C4004F1BD4 /* libz.dylib in Frameworks */,
 				7F4DB65B1583F7C7004F1BD4 /* libxml2.dylib in Frameworks */,
+				7F9F3281158C301300D0ED9E /* DDHidLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +579,7 @@
 				7F927DC41583E3AA002E62A1 /* CoreFoundation.framework in Frameworks */,
 				7F927DB41583DEDB002E62A1 /* Foundation.framework in Frameworks */,
 				7F9F324915856DC700D0ED9E /* libfreetype.a in Frameworks */,
+				7F9F3282158C301300D0ED9E /* DDHidLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,6 +636,7 @@
 				7F4DB5601583E6B3004F1BD4 /* libz.dylib */,
 				7F4DB55E1583E6A4004F1BD4 /* libxml2.dylib */,
 				7F9F324815856DC700D0ED9E /* libfreetype.a */,
+				7F9F3280158C301300D0ED9E /* DDHidLib.framework */,
 				7F927DC31583E3AA002E62A1 /* CoreFoundation.framework */,
 				7F927DB21583DEDB002E62A1 /* Foundation.framework */,
 				7F9269781583C23B002E62A1 /* OpenGL.framework */,
@@ -952,6 +974,7 @@
 			isa = PBXGroup;
 			children = (
 				7F926A9E1583CBC5002E62A1 /* CCAccelerometer_mac.h */,
+				7F9F3286158C307400D0ED9E /* CCAccelerometer_mac.cpp */,
 				7F926A9F1583CBC5002E62A1 /* CCApplication_mac.h */,
 				7F926AA01583CBC5002E62A1 /* CCApplication_mac.mm */,
 				7F926AA11583CBC5002E62A1 /* CCCommon_mac.mm */,
@@ -1242,6 +1265,7 @@
 				7F9258DA1583BF47002E62A1 /* Sources */,
 				7F9258DB1583BF47002E62A1 /* Frameworks */,
 				7F9258DC1583BF47002E62A1 /* Resources */,
+				7F9F3284158C302400D0ED9E /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1434,6 +1458,7 @@
 				7F927D851583CBDE002E62A1 /* CCTMXXMLParser.cpp in Sources */,
 				7F927D861583CBDE002E62A1 /* CCTouchDispatcher.cpp in Sources */,
 				7F927D871583CBDE002E62A1 /* CCTouchHandler.cpp in Sources */,
+				7F9F3287158C307400D0ED9E /* CCAccelerometer_mac.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1531,6 +1556,10 @@
 		7F9258FD1583BF48002E62A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "./HelloWorld/HelloWorld-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2dx/";
@@ -1544,6 +1573,10 @@
 		7F9258FE1583BF48002E62A1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "./HelloWorld/HelloWorld-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../cocos2dx/";
@@ -1559,6 +1592,10 @@
 			buildSettings = {
 				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"COCOS2D_DEBUG=1",
 					USE_FILE32API,
@@ -1585,6 +1622,10 @@
 			buildSettings = {
 				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../cocos2dx/platform/third_party/mac/libraries\"",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					USE_FILE32API,
