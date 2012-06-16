@@ -40,6 +40,7 @@
 #import "CCTouch.h"
 #import "CCIMEDispatcher.h"
 #import "CCAccelerometer_mac.h"
+#import "CCKeypadDispatcher.h"
 
 
 #define MAX_TOUCHES     11
@@ -430,7 +431,23 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
 
 - (void)keyDown:(NSEvent *)theEvent
 {
+#if 0
 	DISPATCH_EVENT(theEvent, _cmd);
+#else 
+    NSString* theEventCharacters = [theEvent charactersIgnoringModifiers];
+    
+    if ([theEventCharacters length] > 0)
+    {
+        unichar theChar = [theEventCharacters characterAtIndex:0];
+        if ([theEvent modifierFlags] & NSShiftKeyMask) {
+            if (theChar == NSF1FunctionKey) {
+                cocos2d::CCKeypadDispatcher::sharedDispatcher()->dispatchKeypadMSG(cocos2d::kTypeBackClicked);
+            } else if (theChar == NSF2FunctionKey) {
+                cocos2d::CCKeypadDispatcher::sharedDispatcher()->dispatchKeypadMSG(cocos2d::kTypeMenuClicked);
+            }
+        }
+    }
+#endif
 }
 
 - (void)keyUp:(NSEvent *)theEvent
