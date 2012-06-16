@@ -439,12 +439,15 @@ static cocos2d::CCTouch *s_pTouches[MAX_TOUCHES];
     if ([theEventCharacters length] > 0)
     {
         unichar theChar = [theEventCharacters characterAtIndex:0];
-        if ([theEvent modifierFlags] & NSShiftKeyMask) {
-            if (theChar == NSF1FunctionKey) {
-                cocos2d::CCKeypadDispatcher::sharedDispatcher()->dispatchKeypadMSG(cocos2d::kTypeBackClicked);
-            } else if (theChar == NSF2FunctionKey) {
-                cocos2d::CCKeypadDispatcher::sharedDispatcher()->dispatchKeypadMSG(cocos2d::kTypeMenuClicked);
-            }
+        if ( ([theEvent modifierFlags] & NSShiftKeyMask) && (theChar == NSF1FunctionKey) ) {
+            cocos2d::CCKeypadDispatcher::sharedDispatcher()->dispatchKeypadMSG(cocos2d::kTypeBackClicked);
+        } else if ( ([theEvent modifierFlags] & NSShiftKeyMask) && (theChar ==NSF2FunctionKey) ) {
+            cocos2d::CCKeypadDispatcher::sharedDispatcher()->dispatchKeypadMSG(cocos2d::kTypeMenuClicked);
+        } else if (theChar == NSDeleteFunctionKey || theChar == 127) { // 127 is the backspace code
+            cocos2d::CCIMEDispatcher::sharedDispatcher()->dispatchDeleteBackward(); 
+        } else {
+            char typedChar = [theEventCharacters characterAtIndex:0];
+            cocos2d::CCIMEDispatcher::sharedDispatcher()->dispatchInsertText(&typedChar, 1);             
         }
     }
 #endif
