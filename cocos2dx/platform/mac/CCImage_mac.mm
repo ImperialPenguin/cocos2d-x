@@ -531,7 +531,7 @@ public:
 		FT_Load_Glyph(face, FT_Get_Char_Index(face, cLastChar),
                       FT_LOAD_DEFAULT);
         
-        oTempLine.iLineWidth = iCurXCursor - SHIFT6((face->glyph->metrics.horiAdvance + face->glyph->metrics.horiBearingX - face->glyph->metrics.width))/*-iInterval*/;//TODO interval
+        oTempLine.iLineWidth = iCurXCursor - SHIFT6((face->glyph->metrics.horiAdvance - face->glyph->metrics.horiBearingX - face->glyph->metrics.width))/*-iInterval*/;//TODO interval
 		iMaxLineWidth = MAX(iMaxLineWidth, oTempLine.iLineWidth);
 		ss.clear();
 		ss.str("");
